@@ -10,13 +10,21 @@ const theme = createTheme({
     },
     h2: {
       fontFamily: "Inter, Arial, sans-serif",
-      fontSize: "18px",
+      fontSize: "16px",
       fontWeight: "600",
       textAlign: "left",
+      lineHeight: "28px",
     },
     h3:{
       fontFamily: "Inter, Arial, sans-serif",
       fontSize: "14px",
+      fontWeight: "600",
+      lineHeight: "24px",
+      textAlign: "left",
+    },
+    h4:{
+      fontFamily: "Inter, Arial, sans-serif",
+      fontSize: "13px",
       fontWeight: "600",
       lineHeight: "24px",
       textAlign: "left",
