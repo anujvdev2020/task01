@@ -1,7 +1,9 @@
 import { styled } from "@mui/material/styles";
 import {Button } from "@mui/material/";
 
-const CustomBlueBtn = styled(Button)(({ theme }) => ({
+
+
+const CustomBlueBtn = styled(Button)(() => ({
   background: "#0E51F1",
  
   width:"143px",

@@ -2,12 +2,17 @@ import TextField from "@mui/material/TextField";
 import { styled } from "@mui/material/styles";
 
 const CustomSearcBar = styled(TextField)(({ theme }) => ({
-  border: "1px solid #E3E7EC",
   borderRadius: "10px",
   width: "380px",
   height: "44px",
   opacity: "0px",
   fontFamily: "Inter, Arial, sans-serif",
+  [theme.breakpoints.down('sm')]: {
+    width: '100%',
+  },
+  root:{
+    fontFamily: "Inter, Arial, sans-serif",
+  },
   
   borderRadius:"10px",
   "& .MuiInputBase-root": {
