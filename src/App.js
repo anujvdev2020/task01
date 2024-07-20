@@ -14,15 +14,20 @@ import CustomSelect from "./components/CustomSelect";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import CustomWebinarCard from "./components/CustomWebinarCard";
+import WebinarForm from './components/WebinarForm'
 import { useState } from "react";
 
 function App() {
   const [selectTopic, setTopic] = useState("");
+  const [formOpen,setFormOpen]=useState(false)
+  const handleClose=()=>{
+    setFormOpen(false)
+  }
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Container maxWidth="xl" sx={{ padding: 2 }}>
-        <Header />
+        <Header setFormOpen={setFormOpen} />
         <Box sx={{ marginTop: 3 }}>
           <Divider component="div" />
           
@@ -58,10 +63,10 @@ function App() {
                   />
                 </Box>
               </Grid>
-              <Grid item xs={12} md={3} sm={3}>
-                <Box sx={{ padding: 2 }}>
+              <Grid item xs={12} md={3} sm={2}>
+                <Box sx={{ padding: 2 ,ml:2,[theme.breakpoints.down('md')]:{ml:0}}}>
                   <FormControl
-                    sx={{ minWidth: 220, height: 44,color:"#2E333B"}}
+                    sx={{ minWidth: 220,[theme.breakpoints.down('md')]:{width:"100%"}, height: 44,color:"#2E333B"}}
                   >
                     <CustomSelect
                       labelId="custom-select-label"
@@ -98,6 +103,7 @@ function App() {
             </Grid>
           </div>
         </Box>
+        <WebinarForm  formOpen={formOpen} handleClose={handleClose}/>
       </Container>
     </ThemeProvider>
   );

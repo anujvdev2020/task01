@@ -5,16 +5,14 @@ const CustomSearcBar = styled(TextField)(({ theme }) => ({
   borderRadius: "10px",
   width: "380px",
   height: "44px",
-  opacity: "0px",
   fontFamily: "Inter, Arial, sans-serif",
+  
   [theme.breakpoints.down('sm')]: {
     width: '100%',
   },
   root:{
     fontFamily: "Inter, Arial, sans-serif",
   },
-  
-  borderRadius:"10px",
   "& .MuiInputBase-root": {
     height: "100%", // Ensure the input field itself takes the full height
     fontFamily: "Inter, Arial, sans-serif",
@@ -24,6 +22,12 @@ const CustomSearcBar = styled(TextField)(({ theme }) => ({
     textAlign: "left",
     color: "#636973",
   },
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderColor: '#E3E7EC', // Default border color
+    },
+  },
+  
 }));
 
 export default CustomSearcBar;

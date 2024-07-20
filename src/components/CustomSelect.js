@@ -3,12 +3,13 @@ import { styled } from "@mui/material/styles";
 
 const CustomSelect = styled(Select)(({ theme }) => ({
   ".MuiSelect-select": {
-    padding: "12px 14px",
+    padding: "12px 10px 10px 15px",
     fontSize: "16px",
     borderRadius: "10px",
-    color:"#2E333B"
+    color:"#2E333B",
   },
   ".MuiOutlinedInput-root": {
+    
     "&:hover fieldset": {
       borderColor: theme.palette.primary.main,
     },
@@ -16,7 +17,7 @@ const CustomSelect = styled(Select)(({ theme }) => ({
   ".MuiOutlinedInput-notchedOutline":{
    borderRadius:"10px",
    fontFamily: "Inter, Arial, sans-serif",
-   color:"#2E333B"
+   color:"#2E333B",
   },
   
   ".MuiSelect-icon": {
