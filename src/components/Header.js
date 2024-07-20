@@ -4,7 +4,7 @@ import CustomBlueBtn from "./CustomBlueBtn";
 const Header = () => {
   return (
     <Grid container spacing={2}>
-      <Grid item xs={10}>
+      <Grid item xs={12} md={9}>
         <Box sx={{ padding: 2 }}>
           <Typography
             variant="h1"
@@ -14,7 +14,7 @@ const Header = () => {
           </Typography>
         </Box>
       </Grid>
-      <Grid item xs={2}>
+      <Grid item xs={12} md={3}>
         <Box sx={{ padding: 2 }}>
           <CustomBlueBtn>Add Webinar</CustomBlueBtn>
         </Box>

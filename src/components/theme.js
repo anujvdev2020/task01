@@ -9,13 +9,24 @@ const theme = createTheme({
       fontFamily: "Inter, Arial, sans-serif",
     },
     h2: {
-      fontSize: "2rem",
-      fontWeight: "bold",
-      lineHeight: 1.3,
+      fontFamily: "Inter, Arial, sans-serif",
+      fontSize: "18px",
+      fontWeight: "600",
+      textAlign: "left",
     },
-    body1: {
-      fontSize: "1rem",
-      lineHeight: 1.5,
+    h3:{
+      fontFamily: "Inter, Arial, sans-serif",
+      fontSize: "14px",
+      fontWeight: "600",
+      lineHeight: "24px",
+      textAlign: "left",
+    },
+    body1:{
+      fontFamily: "Inter, Arial, sans-serif",
+      fontSize: "14px",
+      fontWeight: "400",
+      lineHeight: "24px",
+      textAlign: "left",
     },
   },
   palette: {
@@ -25,6 +36,12 @@ const theme = createTheme({
     secondary: {
       main: "#dc004e",
     },
+    light:{
+      main:"#FFFF"
+    },
+    dark:{
+      main:"#2E333B"
+    }
   },
   button: {
     blueButton: {
@@ -34,7 +51,7 @@ const theme = createTheme({
       fontWeight: "600",
       height: "44px",
       width: "143px",
-      boxShadow: "0px 8px 20px -8px rgba(14, 81, 241, 1)"
+      boxShadow: "0px 8px 20px -8px rgba(14, 81, 241, 1)",
     },
   },
 });

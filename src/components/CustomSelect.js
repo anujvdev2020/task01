@@ -5,21 +5,22 @@ const CustomSelect = styled(Select)(({ theme }) => ({
   ".MuiSelect-select": {
     padding: "12px 14px",
     fontSize: "16px",
+    borderRadius: "10px",
+    color:"#2E333B"
   },
   ".MuiOutlinedInput-root": {
-    width: "220px",
-    height: "44px",
-    borderRadius: "8px",
-    backgroundColor: "#f5f5f5",
-    "& fieldset": {
-      borderColor: "#ccc",
-    },
     "&:hover fieldset": {
       borderColor: theme.palette.primary.main,
     },
   },
+  ".MuiOutlinedInput-notchedOutline":{
+   borderRadius:"10px",
+   fontFamily: "Inter, Arial, sans-serif",
+   color:"#2E333B"
+  },
+  
   ".MuiSelect-icon": {
-    color: theme.palette.primary.main,
+    marginRight:"10px"
   },
 }));
 
