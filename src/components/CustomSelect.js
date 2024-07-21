@@ -10,14 +10,12 @@ const CustomSelect = styled(Select)(({ theme }) => ({
   },
   ".MuiOutlinedInput-root": {
     
-    "&:hover fieldset": {
-      borderColor: theme.palette.primary.main,
-    },
   },
   ".MuiOutlinedInput-notchedOutline":{
    borderRadius:"10px",
    fontFamily: "Inter, Arial, sans-serif",
    color:"#2E333B",
+   borderColor: '#E3E7EC', //custom border color
   },
   
   ".MuiSelect-icon": {

@@ -14,23 +14,59 @@ import CustomSelect from "./components/CustomSelect";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import CustomWebinarCard from "./components/CustomWebinarCard";
-import WebinarForm from './components/WebinarForm'
+import WebinarForm from "./components/WebinarForm";
 import { useState } from "react";
+import { instructors } from "./components/Contants";
 
 function App() {
   const [selectTopic, setTopic] = useState("");
-  const [formOpen,setFormOpen]=useState(false)
-  const handleClose=()=>{
-    setFormOpen(false)
+  const [formOpen, setFormOpen] = useState(false);
+  const [webinars, setWebinars] = useState([]);
+  const [selectedWebinar, setSelectedWebinar] = useState({});
+  const handleClose = () => {
+    setFormOpen(false);
+  };
+
+  const handleAddWebinars = (webinarData) => {
+    if (webinarData.id !=undefined) {
+      let webinarArr = webinars.map((item) => {
+        return item.id == webinarData.id ? { ...webinarData } : item;
+      });
+      setWebinars([...webinarArr])
+    }
+    else{
+      let item = { id: webinars.length+1,...webinarData,  };
+      setWebinars([...webinars,item])
+    }
+    handleClose()
+    setSelectedWebinar({})
+   
+  };
+  const handleDelete=(id)=>{
+    const filteredArr=webinars.filter((item)=>item.id!==id)
+    setWebinars([...filteredArr])
   }
+
+  
+
+  const handleSetSelectedWebinar = (webinarData) => {
+    setSelectedWebinar(webinarData);
+    setFormOpen(true);
+  };
+
+  const handleAddWebinarClick=()=>{
+    setSelectedWebinar({})
+    setFormOpen(true)
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Container maxWidth="xl" sx={{ padding: 2 }}>
-        <Header setFormOpen={setFormOpen} />
+        <Header setFormOpen={handleAddWebinarClick} />
         <Box sx={{ marginTop: 3 }}>
           <Divider component="div" />
-          
+
           <div className="scroll-container">
             <Grid container spacing={2}>
               <Grid item xs={12} md={9}>
@@ -39,8 +75,8 @@ function App() {
                     InputProps={{
                       style: {
                         borderRadius: "10px",
-                        fontFamily:"Inter, Arial, sans-serif",
-                        color:"#636973"
+                        fontFamily: "Inter, Arial, sans-serif",
+                        color: "#636973",
                       },
                       startAdornment: (
                         <InputAdornment position="start">
@@ -54,8 +90,8 @@ function App() {
                       ),
                     }}
                     sx={{
-                      '& .MuiInputBase-input::placeholder': {
-                        color:"#636973", // Placeholder text color
+                      "& .MuiInputBase-input::placeholder": {
+                        color: "#636973", // Placeholder text color
                       },
                     }}
                     placeholder="Search for webinar"
@@ -64,9 +100,20 @@ function App() {
                 </Box>
               </Grid>
               <Grid item xs={12} md={3} sm={2}>
-                <Box sx={{ padding: 2 ,ml:2,[theme.breakpoints.down('md')]:{ml:0}}}>
+                <Box
+                  sx={{
+                    padding: 2,
+                    ml: 2,
+                    [theme.breakpoints.down("md")]: { ml: 0 },
+                  }}
+                >
                   <FormControl
-                    sx={{ minWidth: 220,[theme.breakpoints.down('md')]:{width:"100%"}, height: 44,color:"#2E333B"}}
+                    sx={{
+                      minWidth: 220,
+                      [theme.breakpoints.down("md")]: { width: "100%" },
+                      height: 44,
+                      color: "#2E333B",
+                    }}
                   >
                     <CustomSelect
                       labelId="custom-select-label"
@@ -74,7 +121,15 @@ function App() {
                       displayEmpty
                       value={selectTopic}
                       IconComponent={() => (
-                        <img style={{marginRight:"10px",height:"20px",width:"20px"}} src={downArrow} alt="arrowicon" />
+                        <img
+                          style={{
+                            marginRight: "10px",
+                            height: "20px",
+                            width: "20px",
+                          }}
+                          src={downArrow}
+                          alt="arrowicon"
+                        />
                       )}
                     >
                       <MenuItem value="">Topic</MenuItem>
@@ -88,22 +143,26 @@ function App() {
             </Grid>
 
             <Grid container spacing={2} sx={{ marginTop: 1 }}>
-              {[
-                { id: 1, name: "Anuj" },
-                { id: 2, name: "Anuj" },
-                { id: 3, name: "Anuj" },
-                { id: 4, name: "Anuj" },
-                { id: 5, name: "Anuj" },
-                { id: 6, name: "Anuj" },
-              ].map((item) => (
-                <Grid item lg={4} sm={6} md={6}>
-                  <CustomWebinarCard />
+              {webinars?.map((item) => (
+                <Grid key={item.id} item lg={4} sm={6} md={6}>
+                  <CustomWebinarCard
+                    webinarData={item}
+                    handleSetSelectedWebinar={handleSetSelectedWebinar}
+                    handleDelete={handleDelete}
+                  />
                 </Grid>
               ))}
             </Grid>
           </div>
         </Box>
-        <WebinarForm  formOpen={formOpen} handleClose={handleClose}/>
+        {formOpen && (
+          <WebinarForm
+            editWebinarData={selectedWebinar}
+            handleAddWebinars={handleAddWebinars}
+            formOpen={formOpen}
+            handleClose={handleClose}
+          />
+        )}
       </Container>
     </ThemeProvider>
   );
