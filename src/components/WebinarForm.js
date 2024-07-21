@@ -379,7 +379,7 @@ const WebinarForm = ({
                     src={image}
                     alt="Selected"
 
-                    style={{ maxWidth: "100%", height: 135, width: 135 }}
+                    style={{ maxWidth: "100%", height: 135, width: 135,borderRadius:"14px" }}
                   />
                 </div>
               ) : (
@@ -405,7 +405,7 @@ const WebinarForm = ({
                     onChange={handleFileChange}
                     accept="image/png, image/jpeg"
                   />
-                  <img src={plusIcon} alt="add-icon" />
+                  <img src={plusIcon}  alt="add-icon" />
                 </Box>
               )}
             </Box>
