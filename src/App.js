@@ -15,49 +15,72 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import CustomWebinarCard from "./components/CustomWebinarCard";
 import WebinarForm from "./components/WebinarForm";
-import { useState } from "react";
-import { instructors } from "./components/Contants";
+import { useEffect, useState } from "react";
+
+
+const filterData = (data, searchTerm, selectedCategory) => {
+  return data.filter((item) => {
+    const searchMatch = Object.keys(item)?.some((key) =>
+      item[key]?.toString()?.toLowerCase()?.includes(searchTerm.toLowerCase())
+    );
+
+    const categoryMatch = selectedCategory
+      ? item.topics === selectedCategory
+      : true;
+
+    return searchMatch && categoryMatch;
+  });
+};
 
 function App() {
-  const [selectTopic, setTopic] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedTopic, setTopic] = useState("");
   const [formOpen, setFormOpen] = useState(false);
   const [webinars, setWebinars] = useState([]);
   const [selectedWebinar, setSelectedWebinar] = useState({});
+  const [filteredData, setFilteredData] = useState([...webinars]);
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+    setFilteredData(filterData(webinars, event.target.value, selectedTopic));
+  };
+  const handleTopicChange = (event) => {
+    setTopic(event.target.value);
+    setFilteredData(filterData(webinars, searchTerm, event.target.value));
+  };
+
   const handleClose = () => {
     setFormOpen(false);
   };
 
   const handleAddWebinars = (webinarData) => {
-    if (webinarData.id !=undefined) {
+    if (webinarData.id != undefined) {
       let webinarArr = webinars.map((item) => {
         return item.id == webinarData.id ? { ...webinarData } : item;
       });
-      setWebinars([...webinarArr])
+      setWebinars([...webinarArr]);
+    } else {
+      let item = { id: webinars.length + 1, ...webinarData };
+      setWebinars([...webinars, item]);
     }
-    else{
-      let item = { id: webinars.length+1,...webinarData,  };
-      setWebinars([...webinars,item])
-    }
-    handleClose()
-    setSelectedWebinar({})
-   
+    handleClose();
+    setSelectedWebinar({});
   };
-  const handleDelete=(id)=>{
-    const filteredArr=webinars.filter((item)=>item.id!==id)
-    setWebinars([...filteredArr])
-  }
-
-  
-
+  const handleDelete = (id) => {
+    const filteredArr = webinars.filter((item) => item.id !== id);
+    setWebinars([...filteredArr]);
+  };
   const handleSetSelectedWebinar = (webinarData) => {
     setSelectedWebinar(webinarData);
     setFormOpen(true);
   };
+  const handleAddWebinarClick = () => {
+    setSelectedWebinar({});
+    setFormOpen(true);
+  };
 
-  const handleAddWebinarClick=()=>{
-    setSelectedWebinar({})
-    setFormOpen(true)
-  }
+  useEffect(() => {
+    setFilteredData([...webinars]);
+  }, [webinars]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -96,6 +119,8 @@ function App() {
                     }}
                     placeholder="Search for webinar"
                     variant="outlined"
+                    value={searchTerm}
+                    onChange={handleSearchChange}
                   />
                 </Box>
               </Grid>
@@ -119,7 +144,7 @@ function App() {
                       labelId="custom-select-label"
                       id="custom-select"
                       displayEmpty
-                      value={selectTopic}
+                      value={selectedTopic}
                       IconComponent={() => (
                         <img
                           style={{
@@ -131,11 +156,12 @@ function App() {
                           alt="arrowicon"
                         />
                       )}
+                      onChange={handleTopicChange}
                     >
                       <MenuItem value="">Topic</MenuItem>
-                      <MenuItem value={10}>Ten</MenuItem>
-                      <MenuItem value={20}>Twenty</MenuItem>
-                      <MenuItem value={30}>Thirty</MenuItem>
+                      <MenuItem value={"React"}>React</MenuItem>
+                      <MenuItem value={"Interviews"}>Interviews</MenuItem>
+                      <MenuItem value={"FAQs"}>FAQs</MenuItem>
                     </CustomSelect>
                   </FormControl>
                 </Box>
@@ -143,15 +169,21 @@ function App() {
             </Grid>
 
             <Grid container spacing={2} sx={{ marginTop: 1 }}>
-              {webinars?.map((item) => (
-                <Grid key={item.id} item lg={4} sm={6} md={6}>
-                  <CustomWebinarCard
-                    webinarData={item}
-                    handleSetSelectedWebinar={handleSetSelectedWebinar}
-                    handleDelete={handleDelete}
-                  />
+              {filteredData && filteredData.length > 0 ? (
+                filteredData?.map((item) => (
+                  <Grid key={item.id} item lg={4} sm={6} md={6}>
+                    <CustomWebinarCard
+                      webinarData={item}
+                      handleSetSelectedWebinar={handleSetSelectedWebinar}
+                      handleDelete={handleDelete}
+                    />
+                  </Grid>
+                ))
+              ) : (
+                <Grid  item lg={4} sm={6} md={6}>
+                  {"No records found. Kindly add a webinar"}
                 </Grid>
-              ))}
+              )}
             </Grid>
           </div>
         </Box>

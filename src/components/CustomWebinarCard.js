@@ -10,8 +10,14 @@ import { userAvatar } from "./assets";
 import CustomEditBtn from "./CustomEditBtn";
 import CustomDeleteBtn from "./CustomDeleteBtn";
 
-import { convertTimeRange,getRandomColor ,getFormattedDate,getDay} from "./utils";
-
+import {
+  convertTimeRange,
+  getRandomColor,
+  getFormattedDate,
+  getDay,
+} from "./utils";
+import { useTheme } from "@emotion/react";
+import { useState,useEffect } from "react";
 
 const CustomCard = styled(Card)(({ theme }) => ({
   width: 380,
@@ -32,18 +38,19 @@ const CustomCard = styled(Card)(({ theme }) => ({
   },
 }));
 
-
-
-
-
-
-
 const CustomWebinarCard = ({
   webinarData,
   handleSetSelectedWebinar,
   handleDelete,
 }) => {
-  const cutomColor = getRandomColor();
+  // const cutomColor = getRandomColor();
+  const theme=useTheme()
+  const [customColor, setCustomColor] = useState('');
+  useEffect(() => {
+    // Call getRandomColor once when the component mounts
+    setCustomColor(getRandomColor());
+  }, []); // Empty dependency array ensures this runs only once
+
 
   const {
     name,
@@ -58,7 +65,7 @@ const CustomWebinarCard = ({
   } = webinarData;
   return (
     <CustomCard>
-      <CardContent sx={{ background: cutomColor, borderRadius: "16px" }}>
+      <CardContent sx={{ background: customColor, borderRadius: "16px" }}>
         <Box
           sx={{
             display: "flex",
@@ -82,7 +89,7 @@ const CustomWebinarCard = ({
               component="img"
               alt="green iguana"
               height="76"
-              image={image ?? userAvatar}
+              image={image || userAvatar}
               sx={{ width: "auto" }}
             />
           </Box>
@@ -90,19 +97,25 @@ const CustomWebinarCard = ({
       </CardContent>
 
       <CardContent sx={{ paddingLeft: 0 }}>
-        <Typography variant="h3" sx={{ color: cutomColor, mb: 1 }}>
+        <Typography variant="h3" sx={{ color: customColor, mb: 1 }}>
           {topics}
         </Typography>
         <Typography variant="h2" sx={{ color: "primary.main", mb: 1 }}>
           {title}
         </Typography>
-        <Box sx={{ display: "flex", alignItems: "center" }}>
-          <Typography component={"body1"} sx={{ color: "dark.main" }}>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            [theme.breakpoints.down("md")]: { display: "block" },
+          }}
+        >
+          <Typography component={"h5"} sx={{ color: "dark.main" }}>
             {getDay(startDate)}
           </Typography>
           <ul style={{ margin: "0", paddingLeft: "30px" }}>
             <li style={{ color: "black" }}>
-              <Typography component={"body1"} sx={{ color: "dark.main" }}>
+              <Typography component={""} sx={{ color: "dark.main" }}>
                 {getFormattedDate(startDate)},
                 {convertTimeRange(startTime, endTime)}
               </Typography>
@@ -114,7 +127,7 @@ const CustomWebinarCard = ({
         <CustomDeleteBtn onClick={() => handleDelete(webinarData.id)}>
           Delete
         </CustomDeleteBtn>
-        <CustomEditBtn onClick={() => handleSetSelectedWebinar(webinarData)}>
+        <CustomEditBtn sx={{marginLeft:"30px"}} onClick={() => handleSetSelectedWebinar(webinarData)}>
           Edit
         </CustomEditBtn>
       </CardActions>

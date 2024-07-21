@@ -29,7 +29,7 @@ const theme = createTheme({
       lineHeight: "24px",
       textAlign: "left",
     },
-    body1:{
+    h5:{
       fontFamily: "Inter, Arial, sans-serif",
       fontSize: "14px",
       fontWeight: "400",

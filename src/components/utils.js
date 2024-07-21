@@ -3,7 +3,7 @@ import moment from "moment";
 //return the time string in hh:mm : hh:mm A format eg: 04:00 - 05:00 PM
 
 const convertTimeRange = (startTime, endTime) => {
-  const start = moment(startTime, "HH:mm").format("h:mm A");
+  const start = moment(startTime, "HH:mm").format("h:mm");
   const end = moment(endTime, "HH:mm").format("h:mm A");
   return `${start} - ${end}`;
 };
