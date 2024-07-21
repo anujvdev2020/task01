@@ -5,7 +5,6 @@ import {
   DialogContent,
   DialogTitle,
   Box,
-  Button,
   Typography,
   IconButton,
 } from "@mui/material/";
@@ -513,7 +512,7 @@ const WebinarForm = ({
         </Box>
       </DialogContent>
       <DialogActions sx={{ justifyContent: "start", ml: 2 }}>
-        <CustomBlueBtn type="submit">Create Webinar</CustomBlueBtn>
+        <CustomBlueBtn sx={{fontWeight:600}} type="submit">Create Webinar</CustomBlueBtn>
         <CustomEditBtn onClick={handleClose}>Cancel</CustomEditBtn>
       </DialogActions>
     </Dialog>

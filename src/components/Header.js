@@ -15,8 +15,8 @@ const Header = ({setFormOpen}) => {
         </Box>
       </Grid>
       <Grid item xs={12} md={3}>
-        <Box sx={{ padding: 2 ,fontWeight:600 }}>
-          <CustomBlueBtn onClick={setFormOpen}>Add Webinar</CustomBlueBtn>
+        <Box sx={{ padding: 2 }}>
+          <CustomBlueBtn sx={{fontWeight:600}} onClick={setFormOpen}>Add Webinar</CustomBlueBtn>
         </Box>
       </Grid>
     </Grid>
