@@ -23,6 +23,7 @@ const filterData = (data, searchTerm, selectedCategory) => {
     const searchMatch = Object.keys(item)?.some((key) =>
       item[key]?.toString()?.toLowerCase()?.includes(searchTerm.toLowerCase())
     );
+    console.log()
 
     const categoryMatch = selectedCategory
       ? item.topics === selectedCategory
@@ -87,8 +88,9 @@ function App() {
       <CssBaseline />
       <Container maxWidth="xl" sx={{ padding: 2 }}>
         <Header setFormOpen={handleAddWebinarClick} />
+        <Divider component="div" sx={{marginLeft:"18px",mb:3}} />
         <Box sx={{ marginTop: 3 }}>
-          <Divider component="div" />
+          
 
           <div className="scroll-container">
             <Grid container spacing={2}>

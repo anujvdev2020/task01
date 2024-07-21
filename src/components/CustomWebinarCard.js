@@ -49,6 +49,7 @@ const CustomWebinarCard = ({
   useEffect(() => {
     // Call getRandomColor once when the component mounts
     setCustomColor(getRandomColor());
+    
   }, []); // Empty dependency array ensures this runs only once
 
 
