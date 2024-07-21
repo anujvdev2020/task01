@@ -8,7 +8,7 @@ const Header = ({setFormOpen}) => {
         <Box sx={{ padding: 2 }}>
           <Typography
             variant="h1"
-            sx={{ color: "primary.main"}}
+            sx={{ color: "primary.main",fontWeight:600}}
           >
             Webinar
           </Typography>

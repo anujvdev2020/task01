@@ -11,9 +11,12 @@ import {
 } from "@mui/material/";
 import CloseIcon from "@mui/icons-material/Close";
 import CustomBlueBtn from "./CustomBlueBtn";
+import CustomEditBtn from './CustomEditBtn'
 
 import { userIcon, cameraIcon, plusIcon } from "./assets";
 import CustomSearcBar from "./CustomSearchBar";
+
+
 import { useTheme } from "@mui/material/styles";
 
 const commonInputStyle = {
@@ -376,6 +379,7 @@ const WebinarForm = ({
                   <img
                     src={image}
                     alt="Selected"
+
                     style={{ maxWidth: "100%", height: 135, width: 135 }}
                   />
                 </div>
@@ -407,7 +411,7 @@ const WebinarForm = ({
               )}
             </Box>
 
-            <Box sx={{ mt: 2 }}>
+            <Box sx={{ mt: "10px" }}>
               <Typography variant="h4" sx={{ color: "primary.main", mb: 1 }}>
                 Topics<span style={{ color: "red" }}>*</span>
               </Typography>
@@ -510,7 +514,7 @@ const WebinarForm = ({
       </DialogContent>
       <DialogActions sx={{ justifyContent: "start", ml: 2 }}>
         <CustomBlueBtn type="submit">Create Webinar</CustomBlueBtn>
-        <Button onClick={handleClose}>Close</Button>
+        <CustomEditBtn onClick={handleClose}>Cancel</CustomEditBtn>
       </DialogActions>
     </Dialog>
   );
