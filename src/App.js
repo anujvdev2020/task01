@@ -23,8 +23,6 @@ const filterData = (data, searchTerm, selectedCategory) => {
     const searchMatch = Object.keys(item)?.some((key) =>
       item[key]?.toString()?.toLowerCase()?.includes(searchTerm.toLowerCase())
     );
-    console.log()
-
     const categoryMatch = selectedCategory
       ? item.topics === selectedCategory
       : true;
